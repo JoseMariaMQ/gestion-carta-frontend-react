@@ -1,25 +1,33 @@
-import {useState, useEffect} from "react";
+import {useContext, useEffect} from "react";
+import ClientPageContext from '../../context/clientPage'
+import Loading from '../../components/Loading'
+import Header from "./components/Header"
+import Section from "./components/Section"
+import Footer from "./components/Footer"
 
 const Home = () => {
-    const [data, setData] = useState([])
+    const {isLoading, hasError, errorMessage, getContacts, contacts, getSections, sections, getDishes, dishes} = useContext(ClientPageContext)
+
+    useEffect( () => {
+        getContacts().catch(null)
+    }, [])
 
     useEffect(() => {
-        const getSections = async () => {
-            const response = await fetch("http://127.0.0.1:8000/api/section")
-            const data = await response.json()
-            setData(data)
-        }
         getSections().catch(null)
     }, [])
 
+    useEffect(() => {
+        getDishes().catch(null)
+    }, [])
+
+    if (isLoading) return <Loading title='Cargando...'/>
     return (
-        <div>
-            <ul>
-                <li>{data[0].name}</li>
-                <li>{data[1].name}</li>
-            </ul>
-        </div>
+        <>
+            <Header contacts={contacts}/>
+            <Section sections={sections} dishes={dishes}/>
+            <Footer/>
+        </>
     )
 }
 
-export default Home;
+export default Home
