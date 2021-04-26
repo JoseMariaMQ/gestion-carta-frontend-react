@@ -31,26 +31,10 @@ const Provider = ({children}) => {
             setIsLoading(true)
             setErrorMessage('')
             setHasError(false)
-            const sections = await apiCall({url: "http://127.0.0.1:8000/api/section"})
+            const sections = await apiCall({url: "http://127.0.0.1:8000/api/menu"})
             setSections(sections)
         } catch (e) {
             setSections([])
-            setErrorMessage('Algo muy malo')
-            setHasError(true)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
-    const getDishes = async () => {
-        try {
-            setIsLoading(true)
-            setErrorMessage('')
-            setHasError(false)
-            const dishes = await apiCall({url: "http://127.0.0.1:8000/api/menu/dishes"})
-            setDishes(dishes)
-        } catch (e) {
-            setDishes([])
             setErrorMessage('Algo muy malo')
             setHasError(true)
         } finally {
@@ -66,9 +50,7 @@ const Provider = ({children}) => {
             getContacts,
             contacts,
             getSections,
-            sections,
-            getDishes,
-            dishes
+            sections
         }}>
             {children}
         </ClientPageContext.Provider>

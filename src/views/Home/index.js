@@ -6,7 +6,7 @@ import Section from "./components/Section"
 import Footer from "./components/Footer"
 
 const Home = () => {
-    const {isLoading, hasError, errorMessage, getContacts, contacts, getSections, sections, getDishes, dishes} = useContext(ClientPageContext)
+    const {isLoading, hasError, errorMessage, getContacts, contacts, getSections, sections} = useContext(ClientPageContext)
 
     useEffect( () => {
         getContacts().catch(null)
@@ -16,15 +16,11 @@ const Home = () => {
         getSections().catch(null)
     }, [])
 
-    useEffect(() => {
-        getDishes().catch(null)
-    }, [])
-
     if (isLoading) return <Loading title='Cargando...'/>
     return (
         <>
             <Header contacts={contacts}/>
-            <Section sections={sections} dishes={dishes}/>
+            <Section sections={sections}/>
             <Footer/>
         </>
     )
