@@ -4,6 +4,11 @@
     object-fit: cover;
 }
 
+.img-dish {
+    width: 100%;
+    object-fit: cover;
+}
+
 .img-children {
     width: 55px;
     height: 55px;
