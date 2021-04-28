@@ -6,6 +6,7 @@
 
 .img-dish {
     width: 100%;
+    max-width: 300px;
     object-fit: cover;
 }
 
@@ -13,4 +14,8 @@
     width: 55px;
     height: 55px;
     object-fit: cover;
+}
+
+.img-allergens {
+    width: 30px;
 }

@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 const Header = ({contacts}) => {
 
     return (
-        <header className="card-header text-center bg-warning">
+        <header className="card-header text-center alert alert-danger">
             <h1 className="fa-5x font-weight-bolder">
                 <span>C</span>
                 <span>U</span>
