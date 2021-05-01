@@ -1,26 +1,26 @@
 import {useContext, useEffect} from "react";
 import ClientPageContext from '../../context/clientPage'
 import Loading from '../../components/Loading'
-import Header from "./components/Header"
+import Header from "../Header"
 import Section from "./components/Section"
-import Footer from "./components/Footer"
+import Footer from "../Footer"
 
 const Home = () => {
-    const {isLoading, hasError, errorMessage, getContacts, contacts, getSections, sections} = useContext(ClientPageContext)
+    const {isLoading, hasError, errorMessage, getContacts, contacts, getMenu, menu} = useContext(ClientPageContext)
 
     useEffect( () => {
         getContacts().catch(null)
     }, [])
 
     useEffect(() => {
-        getSections().catch(null)
+        getMenu().catch(null)
     }, [])
 
-    if (isLoading) return <Loading title='Cargando...'/>
+    if (isLoading) return <Loading/>
     return (
         <>
             <Header contacts={contacts}/>
-            <Section sections={sections}/>
+            <Section sections={menu}/>
             <Footer/>
         </>
     )

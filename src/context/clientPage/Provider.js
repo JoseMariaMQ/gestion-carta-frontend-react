@@ -7,8 +7,7 @@ const Provider = ({children}) => {
     const [hasError, setHasError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [contacts, setContacts] = useState([])
-    const [sections, setSections] = useState([])
-    const [dishes, setDishes] = useState([])
+    const [menu, setMenu] = useState([])
 
     const getContacts = async () => {
         try {
@@ -19,23 +18,23 @@ const Provider = ({children}) => {
             setContacts(contacts)
         } catch (e) {
             setContacts([])
-            setErrorMessage('Algo muy malo')
+            setErrorMessage('API connection error')
             setHasError(true)
         } finally {
             setIsLoading(false)
         }
     }
 
-    const getSections = async () => {
+    const getMenu = async () => {
         try {
             setIsLoading(true)
             setErrorMessage('')
             setHasError(false)
             const sections = await apiCall({url: "http://127.0.0.1:8000/api/menu"})
-            setSections(sections)
+            setMenu(sections)
         } catch (e) {
-            setSections([])
-            setErrorMessage('Algo muy malo')
+            setMenu([])
+            setErrorMessage('API connection error')
             setHasError(true)
         } finally {
             setIsLoading(false)
@@ -49,8 +48,8 @@ const Provider = ({children}) => {
             hasError,
             getContacts,
             contacts,
-            getSections,
-            sections
+            getMenu,
+            menu
         }}>
             {children}
         </ClientPageContext.Provider>

@@ -1,21 +1,26 @@
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "../views/Home";
-import PokemonDetail from '../views/PokemonDetail'
+import Login from "../views/Login";
+import Admin from "../views/Admin";
 import FourOFour from "../views/404";
-// import ScrollToTop from '../components/ScrollToTop'
+import Provider from "../context/adminPage/Provider";
 
 const Routes = () => {
 
     return (
         <Router>
-            {/*<ScrollToTop/>*/}
             <Switch>
                 <Route path="/" exact>
                     <Home/>
                 </Route>
-                <Route path="/pokemon/:id">
-                    <PokemonDetail/>
+                <Route path="/login" exact>
+                    <Login/>
                 </Route>
+                <Provider>
+                    <Route path="/admin" exact>
+                        <Admin/>
+                    </Route>
+                </Provider>
                 <Route>
                     <FourOFour/>
                 </Route>
