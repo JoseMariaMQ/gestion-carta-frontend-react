@@ -1,4 +1,3 @@
-
 const DrinkShow = ({id, name, price, picture}) => {
 
     return (

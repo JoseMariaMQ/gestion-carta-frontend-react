@@ -12,27 +12,35 @@ const Header = ({contacts}) => {
                 <span>'</span>
                 <span>S</span>
             </h1>
-            <div className="row">
-                <div className="col-sm-2 col-md-3"/>
-                <div className="col-sm-8 col-md-6">
-                    <a className="col" href={contacts[0]?.url} target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={["fab", "whatsapp-square"]} size="2x"/>
-                    </a>
-                    <a className="col" href={contacts[1]?.url} target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={["fas", "phone-square"]} size="2x"/>
-                    </a>
-                    <a className="col" href={contacts[2]?.url} target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={["fab", "facebook-square"]} size="2x"/>
-                    </a>
-                    <a className="col" href={contacts[3]?.url} target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={["fab", "instagram-square"]} size="2x"/>
-                    </a>
-                    <a className="col" href={contacts[4]?.url} target="_blank" rel="noreferrer">
-                        <FontAwesomeIcon icon={["fas", "map-marker-alt"]} size="2x"/>
-                    </a>
-                </div>
-                <div className="col-sm-2 col-md-3"/>
-            </div>
+            {
+                contacts?.map((contact) => (
+                    !contact.hidden && contact.name.toLowerCase() === 'whatsapp' ? (
+                        <a key={contact.id} className="col" href={contact.url} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon icon={["fab", "whatsapp-square"]} size="2x"/>
+                        </a>
+                    ) : !contact.hidden && contact.name.toLowerCase() === 'phone' ? (
+                        <a key={contact.id} className="col" href={contact.url} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon icon={["fas", "phone-square"]} size="2x"/>
+                        </a>
+                    ) : !contact.hidden && contact.name.toLowerCase() === 'facebook' ? (
+                        <a key={contact.id} className="col" href={contact.url} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon icon={["fab", "facebook-square"]} size="2x"/>
+                        </a>
+                    ) : !contact.hidden && contact.name.toLowerCase() === 'instagram' ? (
+                        <a key={contact.id} className="col" href={contact.url} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon icon={["fab", "instagram-square"]} size="2x"/>
+                        </a>
+                    ) : !contact.hidden && contact.name.toLowerCase() === 'twitter' ? (
+                        <a key={contact.id} className="col" href={contact.url} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon icon={["fab", "twitter-square"]} size="2x"/>
+                        </a>
+                    ) : !contact.hidden && contact.name.toLowerCase() === 'google maps' ? (
+                        <a key={contact.id} className="col" href={contact.url} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon icon={["fas", "map-marker-alt"]} size="2x"/>
+                        </a>
+                    ) : ('')
+                ))
+            }
         </header>
     )
 }
