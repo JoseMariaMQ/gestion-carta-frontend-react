@@ -9,12 +9,22 @@ const Provider = ({children}) => {
     const [userLogin, setUserLogin] = useState([])
 
     const getUserLogin = async (credentials) => {
+        credentials.remember_token = true
         try {
             setIsLoading(true)
             setErrorMessage('')
             setHasError(false)
-            const userLogin = await apiCall({url: "http://127.0.0.1:8000/api/auth/login", method: "post", body: credentials})
+            const userLogin = await apiCall({url: "http://127.0.0.1:8000/api/auth/login", method: "post", body: JSON.stringify(credentials)})
             setUserLogin(userLogin)
+
+            if (userLogin.data !== "Unauthorized") {
+                const {token_type, access_token} = userLogin.auth
+                localStorage.setItem('jwtToken', `${token_type} ${access_token}`)
+                console.log(userLogin)
+                return true
+            } else {
+                console.log("Unauthorized")
+            }
         } catch (e) {
             setUserLogin([])
             setErrorMessage('API connection error')

@@ -4,6 +4,7 @@ import Login from "../views/Login";
 import Admin from "../views/Admin";
 import FourOFour from "../views/404";
 import Provider from "../context/adminPage/Provider";
+import ProtectedRoute from "../auth";
 
 const Routes = () => {
 
@@ -13,14 +14,17 @@ const Routes = () => {
                 <Route path="/" exact>
                     <Home/>
                 </Route>
-                <Route path="/login" exact>
-                    <Login/>
-                </Route>
+
                 <Provider>
-                    <Route path="/admin" exact>
-                        <Admin/>
+                    <Route path="/login" exact>
+                        <Login/>
                     </Route>
+
+                    <ProtectedRoute path="/admin" exact component={Admin}>
+                        {/*<Admin/>*/}
+                    </ProtectedRoute>
                 </Provider>
+
                 <Route>
                     <FourOFour/>
                 </Route>

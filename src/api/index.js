@@ -2,7 +2,7 @@ const apiCall = async ({
     url,
     method = 'get',
     body,
-    headers
+    headers = {"Content-Type": "application/json"}
                  }) => {
     try {
         const response = await fetch(url, {

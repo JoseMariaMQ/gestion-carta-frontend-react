@@ -6,7 +6,7 @@ import Footer from "../Footer";
 import Loading from "../../components/Loading";
 
 const Admin = () => {
-    const {isLoading, hasError, errorMessage, getContacts, contacts, getMenu, menu} = useContext(ClientPageContext)
+    const {isLoading, getContacts, contacts, getMenu, menu} = useContext(ClientPageContext)
 
     useEffect( () => {
         getContacts().catch(null)

@@ -6,7 +6,7 @@ import Section from "./components/Section"
 import Footer from "../Footer"
 
 const Home = () => {
-    const {isLoading, hasError, errorMessage, getContacts, contacts, getMenu, menu} = useContext(ClientPageContext)
+    const {isLoading, getContacts, contacts, getMenu, menu} = useContext(ClientPageContext)
 
     useEffect( () => {
         getContacts().catch(null)

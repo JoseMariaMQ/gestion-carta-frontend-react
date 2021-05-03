@@ -41,6 +41,7 @@ const SectionEdit = (section) => {
                                 <small className="form-text text-muted">jpeg, jpg, png. Max: 512KB</small>
                             </div>
                             <button type="submit" className="btn btn-primary">EDITAR</button>
+                            <button onClick={() => {setEditSection([!editSection[0], section.id])}} className="btn btn-danger ml-2">CANCELAR</button>
                         </form>
                     ) : ('')
                 }

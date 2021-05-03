@@ -1,17 +1,17 @@
 import {useState} from "react";
 
-const DishEdit = ({id, name, price, picture}) => {
-    const [editDish, setEditDish] = useState([false, null])
+const DessertEdit = ({id, name, price, picture}) => {
+    const [editDessert, setEditDessert] = useState([false, null])
 
     return (
         <div key={id}>
             <div className="row alert alert-danger p-0 mb-2">
-                <span className="col-2 col-sm-1 p-0">{picture ? <img className="img-thumbnail img-children" src={picture.url} alt="Dish"/> : ""}</span>
+                <span className="col-2 col-sm-1 p-0">{picture ? <img className="img-thumbnail img-children" src={picture.url} alt="dessert"/> : ""}</span>
                 <div className="col-8 col-sm-9 p-0 m-0 pl-3 pl-sm-0">
                     <span className="d-flex justify-content-center h6 mb-1">{name}</span>
                     <div className="d-flex justify-content-center">
                         <button className="btn btn-dark btn-sm ml-1 mr-1">OCULTAR</button>
-                        <button onClick={() => {setEditDish([!editDish[0], id])}} className="btn btn-warning btn-sm ml-1 mr-1">EDITAR</button>
+                        <button onClick={() => {setEditDessert([!editDessert[0], id])}} className="btn btn-warning btn-sm ml-1 mr-1">EDITAR</button>
                         <button className="btn btn-danger btn-sm ml-1 mr-1">ELIMINAR</button>
                     </div>
                 </div>
@@ -19,17 +19,17 @@ const DishEdit = ({id, name, price, picture}) => {
             </div>
             <div className="d-flex justify-content-center">
                 {
-                    editDish[0] && editDish[1] === id ? (
+                    editDessert[0] && editDessert[1] === id ? (
                         <form action="" className="mb-3">
                             <div className="form-group">
-                                <label htmlFor="inputTitle">Título del plato</label>
-                                <input type="text" className="form-control" placeholder="Introduce el nombre del plato"/>
+                                <label htmlFor="inputTitle">Título del postre</label>
+                                <input type="text" className="form-control" placeholder="Introduce el nombre del postre"/>
                                 <small className="form-text text-muted">El título no debe de ser demasiado largo</small>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="inputPrice">Precio del plato</label>
-                                <input type="number" className="form-control" placeholder="Introduce el precio del plato"/>
+                                <label htmlFor="inputPrice">Precio del postre</label>
+                                <input type="number" className="form-control" placeholder="Introduce el precio del postre"/>
                                 <small className="form-text text-muted"/>
                             </div>
 
@@ -57,7 +57,7 @@ const DishEdit = ({id, name, price, picture}) => {
 
                             <div className="form-group">
                                 <label htmlFor="inputIngredients">Ingredientes</label>
-                                <input type="text" className="form-control" placeholder="Introduce los ingredientes del plato"/>
+                                <input type="text" className="form-control" placeholder="Introduce los ingredientes del postre"/>
                                 <small className="form-text text-muted"/>
                             </div>
 
@@ -124,12 +124,12 @@ const DishEdit = ({id, name, price, picture}) => {
                             </div>
 
                             <div className="form-group mt-2">
-                                <label htmlFor="inputPicture">Imagen del plato</label>
+                                <label htmlFor="inputPicture">Imagen del postre</label>
                                 <input type="file" className="form-control"/>
                                 <small className="form-text text-muted">jpeg, jpg, png. Max: 512KB</small>
                             </div>
                             <button type="submit" className="btn btn-primary">EDITAR</button>
-                            <button onClick={() => {setEditDish([!editDish[0], id])}} className="btn btn-danger ml-2">CANCELAR</button>
+                            <button onClick={() => {setEditDessert([!editDessert[0], id])}} className="btn btn-danger ml-2">CANCELAR</button>
                         </form>
                     ) : ('')
                 }
@@ -138,4 +138,4 @@ const DishEdit = ({id, name, price, picture}) => {
     )
 }
 
-export default DishEdit
+export default DessertEdit

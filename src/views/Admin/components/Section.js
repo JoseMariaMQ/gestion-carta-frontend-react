@@ -33,7 +33,7 @@ const Section = ({sections}) => {
             }
             {
                 sections?.map((section) => (
-                    <SectionEdit {...section}/>
+                    <SectionEdit key={section.id} {...section}/>
                 ))
             }
         </section>
