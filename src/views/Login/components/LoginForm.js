@@ -4,6 +4,7 @@ import {useContext} from "react";
 import AdminPageContext from "../../../context/adminPage";
 import Admin from "../../Admin";
 import ProtectedRoute from "../../../auth";
+import {Redirect} from "react-router-dom";
 
 const LoginForm = () => {
     const {register, handleSubmit} = useForm();
@@ -12,8 +13,10 @@ const LoginForm = () => {
     const onSubmit = (credentials) => {
         getUserLogin(credentials)
     }
-
-    if (localStorage.getItem('jwtToken')) return <ProtectedRoute path="/admin" exact component={Admin}/>
+    console.log(Date.now(), new Date(localStorage.getItem('tokenExpires')).getTime())
+    if (localStorage.getItem('jwtToken')) {
+        return /*<Redirect to={{pathname: '/admin'}}/>*/ <ProtectedRoute path="/admin" exact component={Admin}/>
+    }
     return (
         <>
             <div className="container">
@@ -38,7 +41,6 @@ const LoginForm = () => {
                                         name="email"
                                         className="form-control"
                                         placeholder="email"
-                                        /*onChange={handleChange}*/
                                         {...register("email", {required: true})}
                                     />
 
@@ -52,7 +54,6 @@ const LoginForm = () => {
                                         name="password"
                                         className="form-control"
                                         placeholder="password"
-                                        /*onChange={handleChange}*/
                                         {...register("password", {required: true})}
                                     />
                                 </div>

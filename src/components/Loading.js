@@ -21,9 +21,9 @@ const Loading = () => {
                         </path>
                     </pattern>
                 </defs>
-                <text textAnchor="middle" x="50" y="15" fontSize="25" fill="url(#wave)" fillOpacity="0.6">CUKY'S
+                <text textAnchor="middle" x="50" y="15" fontSize="20" fill="url(#wave)" fillOpacity="0.6">CUKY'S
                 </text>
-                <text textAnchor="middle" x="50" y="15" fontSize="25" fill="url(#gradient)"
+                <text textAnchor="middle" x="50" y="15" fontSize="20" fill="url(#gradient)"
                       fillOpacity="0.1">CUKY'S
                 </text>
             </svg>

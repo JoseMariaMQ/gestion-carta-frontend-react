@@ -20,9 +20,7 @@ const Routes = () => {
                         <Login/>
                     </Route>
 
-                    <ProtectedRoute path="/admin" exact component={Admin}>
-                        {/*<Admin/>*/}
-                    </ProtectedRoute>
+                    <ProtectedRoute path="/admin" exact component={Admin}/>
                 </Provider>
 
                 <Route>
