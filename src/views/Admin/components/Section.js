@@ -10,8 +10,8 @@ const Section = ({sections}) => {
 
     const onSubmit = async (data) => {
         const body = {'name': data.name, 'order': data.order}
-        const media = {'media': data.media} // Como enviar archivos??
-        console.log(body, media)
+        const media = new FormData()
+        media.append('media', data.media[0])
         await storeSection(body, media)
         window.location.reload()
     }

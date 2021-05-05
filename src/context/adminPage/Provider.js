@@ -15,7 +15,15 @@ const Provider = ({children}) => {
             setIsLoading(true)
             setErrorMessage('')
             setHasError(false)
-            const userLogin = await apiCall({url: "http://127.0.0.1:8000/api/auth/login", method: "post", body: JSON.stringify(credentials)})
+            const userLogin = await apiCall({
+                url: "http://127.0.0.1:8000/api/auth/login",
+                method: "post",
+                body: JSON.stringify(credentials),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
             setUserLogin(userLogin)
 
             if (userLogin.data !== "Unauthorized") {
@@ -41,12 +49,19 @@ const Provider = ({children}) => {
             const section = await apiCall( {
                 url: 'http://127.0.0.1:8000/api/section',
                 method: 'POST',
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
             })
             const picture = await apiCall({
                 url: `http://127.0.0.1:8000/api/section/${section.data.id}/section-picture`,
                 method: 'POST',
-                body: media
+                body: media,
+                headers: {
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
             })
             console.log(section, picture)
         } catch (e) {
@@ -56,7 +71,13 @@ const Provider = ({children}) => {
 
     const getSectionForm = async (id) => {
         try {
-            const section = await apiCall({url: `http://127.0.0.1:8000/api/section/${id}`})
+            const section = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${id}`,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
             setSectionForm(section)
         } catch (e) {
             console.log(e)
@@ -68,7 +89,11 @@ const Provider = ({children}) => {
             const section = await apiCall({
                 url: `http://127.0.0.1:8000/api/section/${data.id}`,
                 method: 'PUT',
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
             })
             console.log(section)
         } catch (e) {
@@ -80,7 +105,11 @@ const Provider = ({children}) => {
         try {
             const section = await apiCall({
                 url: `http://127.0.0.1:8000/api/section/${id}`,
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
             })
             console.log(section)
         } catch (e) {

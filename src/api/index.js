@@ -2,11 +2,8 @@ const apiCall = async ({
     url,
     method = 'get',
     body,
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": localStorage.getItem('jwtToken')
-    }
-                 }) => {
+    headers
+}) => {
     try {
         const response = await fetch(url, {
             method,

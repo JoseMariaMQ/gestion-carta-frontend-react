@@ -5,22 +5,20 @@ import Admin from "../views/Admin";
 import FourOFour from "../views/404";
 import Provider from "../context/adminPage/Provider";
 import ProtectedRoute from "../auth";
+import CheckLogin from "../auth/CheckLogin";
 
 const Routes = () => {
 
     return (
         <Router>
             <Switch>
-                <Route path="/" exact>
+                <Route exact path="/">
                     <Home/>
                 </Route>
 
                 <Provider>
-                    <Route path="/login" exact>
-                        <Login/>
-                    </Route>
-
-                    <ProtectedRoute path="/admin" exact component={Admin}/>
+                    <CheckLogin exact path="/login" component={Login}/>
+                    <ProtectedRoute exact path="/admin" component={Admin}/>
                 </Provider>
 
                 <Route>

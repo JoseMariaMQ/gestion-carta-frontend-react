@@ -4,6 +4,10 @@ import Dessert from "./Dessert";
 import Drink from "./Drink";
 import {useForm} from "react-hook-form";
 import AdminPageContext from "../../../context/adminPage";
+import FormNewDish from "./FormNewDish";
+import FormNewDessert from "./FormNewDessert";
+import FormNewDrink from "./FormNewDrink";
+import FormNewChoose from "./FormNewChoose";
 
 const SectionEdit = (section) => {
     const [editSection, setEditSection] = useState([false, null])
@@ -46,6 +50,17 @@ const SectionEdit = (section) => {
                     {section.picture ? <img className="img-fluid img-section float-right rounded-right" src={section.picture.url} alt="Section"/> : ""}
                 </div>
             </div>
+            {
+                section.dishes.length > 0 ? (
+                    <FormNewDish {...section}/>
+                ) : section.desserts.length > 0 ? (
+                    <FormNewDessert {...section}/>
+                ) : section.drinks.length > 0 ? (
+                    <FormNewDrink {...section}/>
+                ) : section.dishes.length < 1 && section.desserts.length < 1 && section.drinks.length < 1 ? (
+                    <FormNewChoose {...section}/>
+                ) : ('')
+            }
             {
                 editSection[0] && editSection[1] === section.id ? (
                     <form onSubmit={handleSubmit(onSubmit)} className="mb-3">

@@ -1,6 +1,6 @@
 import DishEdit from "./DishEdit";
 
-const Dish = ({dishes}) => {
+const Dish = ({dishes, id}) => {
 
     return (
         <>

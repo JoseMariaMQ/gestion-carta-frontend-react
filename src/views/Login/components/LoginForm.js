@@ -2,21 +2,16 @@ import {useForm} from "react-hook-form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useContext} from "react";
 import AdminPageContext from "../../../context/adminPage";
-import Admin from "../../Admin";
-import ProtectedRoute from "../../../auth";
-import {Redirect} from "react-router-dom";
 
 const LoginForm = () => {
     const {register, handleSubmit} = useForm();
     const {getUserLogin} = useContext(AdminPageContext)
 
-    const onSubmit = (credentials) => {
-        getUserLogin(credentials)
+    const onSubmit = async (credentials) => {
+        await getUserLogin(credentials)
+        window.location.reload()
     }
-    console.log(Date.now(), new Date(localStorage.getItem('tokenExpires')).getTime())
-    if (localStorage.getItem('jwtToken')) {
-        return /*<Redirect to={{pathname: '/admin'}}/>*/ <ProtectedRoute path="/admin" exact component={Admin}/>
-    }
+
     return (
         <>
             <div className="container">
