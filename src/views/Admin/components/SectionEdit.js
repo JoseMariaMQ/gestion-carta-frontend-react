@@ -12,13 +12,15 @@ import FormNewChoose from "./FormNewChoose";
 const SectionEdit = (section) => {
     const [editSection, setEditSection] = useState([false, null])
     const {register, handleSubmit} = useForm()
-    const {sectionForm, getSectionForm, updateSection, deleteSection} = useContext(AdminPageContext)
+    const {updateSection, deleteSection} = useContext(AdminPageContext)
 
     const onSubmit = async (data) => {
         const body = {'name': data.name, 'order': data.order}
         body.id = editSection[1]
+        const media = new FormData()
+        media.append('media', data.media[0])
         console.log(body)
-        await updateSection(body)
+        await updateSection(body, media)
         setEditSection(!editSection[0])
         window.location.reload()
     }
@@ -42,7 +44,7 @@ const SectionEdit = (section) => {
                     <h2 className="ml-2">{section.name}</h2>
                     <div className="ml-1 d-flex justify-content-start">
                         <button onClick={() => {setHidden(!section.hidden, section.id)}} className={section.hidden ? "btn btn-success btn-sm ml-1 mr-1" : "btn btn-dark btn-sm ml-1 mr-1"}>{section.hidden ? 'MOSTRAR' : 'OCULTAR'}</button>
-                        <button onClick={() => {setEditSection([!editSection[0], section.id]); getSectionForm(section.id)}} className="btn btn-warning btn-sm ml-1 mr-1">EDITAR</button>
+                        <button onClick={() => {setEditSection([!editSection[0], section.id])}} className="btn btn-warning btn-sm ml-1 mr-1">EDITAR</button>
                         <button onClick={() => {deleteSectionId(section.id)}} className="btn btn-danger btn-sm ml-1 mr-1">ELIMINAR</button>
                     </div>
                 </div>
@@ -66,12 +68,12 @@ const SectionEdit = (section) => {
                     <form onSubmit={handleSubmit(onSubmit)} className="mb-3">
                         <div className="form-group">
                             <label htmlFor="inputTitle">Título de la sección</label>
-                            <input type="text" name="name" defaultValue={sectionForm.name?sectionForm.name:''} className="form-control" placeholder="Introduce el nombre de la sección" {...register("name", {required: true})}/>
+                            <input type="text" name="name" defaultValue={section.name} className="form-control" placeholder="Introduce el nombre de la sección" {...register("name", {required: true})}/>
                             <small className="form-text text-muted">El título no debe de ser demasiado largo</small>
                         </div>
                         <div className="form-group">
                             <label htmlFor="inputOrder">Orden de la sección</label>
-                            <input type="number" name="order" defaultValue={sectionForm.order?sectionForm.order:''} className="form-control" placeholder="Introduce el orden de la sección" {...register("order", {required: true})}/>
+                            <input type="number" name="order" defaultValue={section.order} className="form-control" placeholder="Introduce el orden de la sección" {...register("order", {required: true})}/>
                             <small className="form-text text-muted">El orden debe de ser un número entero</small>
                         </div>
                         <div className="form-group">

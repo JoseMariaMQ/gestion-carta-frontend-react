@@ -65,7 +65,7 @@ const LoginForm = () => {
                             Don't have an account?<a href="#">Sign Up</a>
                         </div>*/}
                             <div className="d-flex justify-content-center">
-                                <a href="#">Forgot your password?</a>
+                                <a href="/login">Forgot your password?</a>
                             </div>
                         </div>
                     </div>

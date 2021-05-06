@@ -69,6 +69,81 @@ const Provider = ({children}) => {
         }
     }
 
+    const storeDish = async (data, media, section_id) => {
+        try {
+            const dish = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/dishes`,
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            const picture = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/dishes/${dish.data.id}/dish-picture`,
+                method: 'POST',
+                body: media,
+                headers: {
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            console.log(dish, picture)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const storeDessert = async (data, media, section_id) => {
+        try {
+            const dessert = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/desserts`,
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            const picture = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/desserts/${dessert.data.id}/dessert-picture`,
+                method: 'POST',
+                body: media,
+                headers: {
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            console.log(dessert, picture)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const storeDrink = async (data, media, section_id) => {
+        try {
+            const drink = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/drinks`,
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            const picture = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/drinks/${drink.data.id}/drink-picture`,
+                method: 'POST',
+                body: media,
+                headers: {
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            console.log(drink, picture)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     const getSectionForm = async (id) => {
         try {
             const section = await apiCall({
@@ -84,7 +159,7 @@ const Provider = ({children}) => {
         }
     }
 
-    const updateSection = async (data) => {
+    const updateSection = async (data, media) => {
         try {
             const section = await apiCall({
                 url: `http://127.0.0.1:8000/api/section/${data.id}`,
@@ -95,7 +170,15 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            console.log(section)
+            const picture = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section.data.id}/section-picture`,
+                method: 'POST',
+                body: media,
+                headers: {
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            console.log(section, picture)
         } catch (e) {
             console.log(e)
         }
@@ -126,6 +209,9 @@ const Provider = ({children}) => {
             userLogin,
             sectionForm,
             storeSection,
+            storeDish,
+            storeDessert,
+            storeDrink,
             getSectionForm,
             updateSection,
             deleteSection

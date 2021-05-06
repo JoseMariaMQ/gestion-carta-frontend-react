@@ -22,7 +22,7 @@ const FormNewChoose = ({id}) => {
                 </div>
             </div>
             {
-                newDish ? (  //Ver como mostrar solo el formulario y deshabilitar los demas botones
+                newDish ? (
                     <FormDish section_id={id}/>
                 ) : newDessert ? (
                     <FormDessert section_id={id}/>

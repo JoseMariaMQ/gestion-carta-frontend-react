@@ -23,13 +23,13 @@ const DrinkEdit = ({id, name, price, picture}) => {
                         <form action="" className="mb-3">
                             <div className="form-group">
                                 <label htmlFor="inputTitle">Título de la bebida</label>
-                                <input type="text" className="form-control" placeholder="Introduce el nombre de la bebida"/>
+                                <input type="text" defaultValue={name} className="form-control" placeholder="Introduce el nombre de la bebida"/>
                                 <small className="form-text text-muted">El título no debe de ser demasiado largo</small>
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="inputPrice">Precio de la bebida</label>
-                                <input type="number" className="form-control" placeholder="Introduce el precio de la bebida"/>
+                                <input type="number" defaultValue={price} className="form-control" placeholder="Introduce el precio de la bebida"/>
                                 <small className="form-text text-muted"/>
                             </div>
 
