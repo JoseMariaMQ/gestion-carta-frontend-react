@@ -23,11 +23,11 @@ const FormNewChoose = ({id}) => {
             </div>
             {
                 newDish ? (
-                    <FormDish section_id={id}/>
+                    <FormDish section_id={id} store={true}/>
                 ) : newDessert ? (
-                    <FormDessert section_id={id}/>
+                    <FormDessert section_id={id} store={true}/>
                 ) : newDrink ? (
-                    <FormDrink section_id={id}/>
+                    <FormDrink section_id={id} store={true}/>
                 ) : ('')
             }
         </>

@@ -124,6 +124,7 @@ const Provider = ({children}) => {
     }
 
     const storeDrink = async (data, media, section_id) => {
+        console.log(data)
         try {
             const drink = await apiCall({
                 url: `http://127.0.0.1:8000/api/section/${section_id}/drinks`,

@@ -11,7 +11,7 @@ const FormNewDrink = ({id}) => {
             </div>
             {
                 newDrink ? (
-                    <FormDrink section_id={id}/>
+                    <FormDrink section_id={id} store={true}/>
                 ) : ('')
             }
         </>
