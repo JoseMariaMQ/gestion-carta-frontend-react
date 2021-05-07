@@ -33,8 +33,11 @@ const SectionEdit = (section) => {
     }
 
     const deleteSectionId = async (id) => {
-        await deleteSection(id)
-        window.location.reload()
+        const confirm = window.confirm('Si eliminas esta sección se eliminarán también todos sus componentes')
+        if (confirm) {
+            await deleteSection(id)
+            window.location.reload()
+        }
     }
 
     return (

@@ -1,7 +1,25 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
+import AdminPageContext from "../../../context/adminPage";
+import FormDrink from "./FormDrink";
 
-const DrinkEdit = ({id, name, price, picture}) => {
+const DrinkEdit = ({id, name, price, hidden, section_id, picture}) => {
     const [editDrink, setEditDrink] = useState([false, null])
+    const {updateDrink, deleteDrink} = useContext(AdminPageContext)
+
+    const setHidden = async (hidden, id, section_id) => {
+        const body = {'hidden': hidden, 'section_id': section_id}
+        console.log(body)
+        await updateDrink(body, null, id)
+        window.location.reload()
+    }
+
+    const deleteDrinkId = async (section_id, id) => {
+        const confirm = window.confirm('Si eliminas esta bebida se eliminarán también todos sus componentes')
+        if (confirm) {
+            await deleteDrink(section_id, id)
+            window.location.reload()
+        }
+    }
 
     return (
         <div key={id}>
@@ -10,9 +28,9 @@ const DrinkEdit = ({id, name, price, picture}) => {
                 <div className="col-8 col-sm-9 p-0 m-0 pl-3 pl-sm-0">
                     <span className="d-flex justify-content-center h6 mb-1">{name}</span>
                     <div className="d-flex justify-content-center">
-                        <button className="btn btn-dark btn-sm ml-1 mr-1">OCULTAR</button>
-                        <button onClick={() => {setEditDrink([!editDrink[0], id])}} className="btn btn-warning btn-sm ml-1 mr-1">EDITAR</button>
-                        <button className="btn btn-danger btn-sm ml-1 mr-1">ELIMINAR</button>
+                        <button onClick={() => {setHidden(!hidden, id, section_id)}} className={hidden ? "btn btn-success btn-sm ml-1 mr-1" : "btn btn-dark btn-sm ml-1 mr-1"}>{hidden ? 'MOSTRAR' : 'OCULTAR'}</button>
+                        <button onClick={() => {setEditDrink([!editDrink[0], id])}} className="btn btn-warning btn-sm ml-1 mr-1">{editDrink[0] ? ('CANCELAR') : ('EDITAR')}</button>
+                        <button onClick={() => {deleteDrinkId(section_id, id)}} className="btn btn-danger btn-sm ml-1 mr-1">ELIMINAR</button>
                     </div>
                 </div>
                 <span className="col-2 col-sm-1 p-0 m-0 d-flex justify-content-end align-items-center h5">{price}€</span>
@@ -20,27 +38,7 @@ const DrinkEdit = ({id, name, price, picture}) => {
             <div className="d-flex justify-content-center">
                 {
                     editDrink[0] && editDrink[1] === id ? (
-                        <form action="" className="mb-3">
-                            <div className="form-group">
-                                <label htmlFor="inputTitle">Título de la bebida</label>
-                                <input type="text" defaultValue={name} className="form-control" placeholder="Introduce el nombre de la bebida"/>
-                                <small className="form-text text-muted">El título no debe de ser demasiado largo</small>
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="inputPrice">Precio de la bebida</label>
-                                <input type="number" defaultValue={price} className="form-control" placeholder="Introduce el precio de la bebida"/>
-                                <small className="form-text text-muted"/>
-                            </div>
-
-                            <div className="form-group mt-2">
-                                <label htmlFor="inputPicture">Imagen dela bebida</label>
-                                <input type="file" className="form-control"/>
-                                <small className="form-text text-muted">jpeg, jpg, png. Max: 512KB</small>
-                            </div>
-                            <button type="submit" className="btn btn-primary">EDITAR</button>
-                            <button onClick={() => {setEditDrink([!editDrink[0], id])}} className="btn btn-danger ml-2">CANCELAR</button>
-                        </form>
+                        <FormDrink id={id} name={name} price={price} section_id={section_id} update={true}/>
                     ) : ('')
                 }
             </div>

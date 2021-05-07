@@ -80,15 +80,17 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            const picture = await apiCall({
-                url: `http://127.0.0.1:8000/api/section/${section_id}/dishes/${dish.data.id}/dish-picture`,
-                method: 'POST',
-                body: media,
-                headers: {
-                    "Authorization": localStorage.getItem('jwtToken')
-                }
-            })
-            console.log(dish, picture)
+            if (media) {
+                await apiCall({
+                    url: `http://127.0.0.1:8000/api/section/${section_id}/dishes/${dish.data.id}/dish-picture`,
+                    method: 'POST',
+                    body: media,
+                    headers: {
+                        "Authorization": localStorage.getItem('jwtToken')
+                    }
+                })
+            }
+            console.log(dish)
         } catch (e) {
             console.log(e)
         }
@@ -105,15 +107,17 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            const picture = await apiCall({
-                url: `http://127.0.0.1:8000/api/section/${section_id}/desserts/${dessert.data.id}/dessert-picture`,
-                method: 'POST',
-                body: media,
-                headers: {
-                    "Authorization": localStorage.getItem('jwtToken')
-                }
-            })
-            console.log(dessert, picture)
+            if (media) {
+                await apiCall({
+                    url: `http://127.0.0.1:8000/api/section/${section_id}/desserts/${dessert.data.id}/dessert-picture`,
+                    method: 'POST',
+                    body: media,
+                    headers: {
+                        "Authorization": localStorage.getItem('jwtToken')
+                    }
+                })
+            }
+            console.log(dessert)
         } catch (e) {
             console.log(e)
         }
@@ -130,15 +134,17 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            const picture = await apiCall({
-                url: `http://127.0.0.1:8000/api/section/${section_id}/drinks/${drink.data.id}/drink-picture`,
-                method: 'POST',
-                body: media,
-                headers: {
-                    "Authorization": localStorage.getItem('jwtToken')
-                }
-            })
-            console.log(drink, picture)
+            if (media) {
+                await apiCall({
+                    url: `http://127.0.0.1:8000/api/section/${section_id}/drinks/${drink.data.id}/drink-picture`,
+                    method: 'POST',
+                    body: media,
+                    headers: {
+                        "Authorization": localStorage.getItem('jwtToken')
+                    }
+                })
+            }
+            console.log(drink)
         } catch (e) {
             console.log(e)
         }
@@ -170,15 +176,17 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            const picture = await apiCall({
-                url: `http://127.0.0.1:8000/api/section/${section.data.id}/section-picture`,
-                method: 'POST',
-                body: media,
-                headers: {
-                    "Authorization": localStorage.getItem('jwtToken')
-                }
-            })
-            console.log(section, picture)
+            if (media) {
+                await apiCall({
+                    url: `http://127.0.0.1:8000/api/section/${section.data.id}/section-picture`,
+                    method: 'POST',
+                    body: media,
+                    headers: {
+                        "Authorization": localStorage.getItem('jwtToken')
+                    }
+                })
+            }
+            console.log(section)
         } catch (e) {
             console.log(e)
         }
@@ -200,6 +208,135 @@ const Provider = ({children}) => {
         }
     }
 
+    const updateDish = async (data, media, id) => {
+        try {
+            const dish = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${data.section_id}/dishes/${id}`,
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            if (media) {
+                await apiCall({
+                    url: `http://127.0.0.1:8000/api/section/${data.section_id}/dishes/${id}/dish-picture`,
+                    method: 'POST',
+                    body: media,
+                    headers: {
+                        "Authorization": localStorage.getItem('jwtToken')
+                    }
+                })
+            }
+            console.log(dish)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const deleteDish = async (section_id, id) => {
+        try {
+            const section = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/dishes/${id}`,
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            console.log(section)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const updateDessert = async (data, media, id) => {
+        try {
+            const dessert = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${data.section_id}/desserts/${id}`,
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            if (media) {
+                await apiCall({
+                    url: `http://127.0.0.1:8000/api/section/${data.section_id}/desserts/${id}/dessert-picture`,
+                    method: 'POST',
+                    body: media,
+                    headers: {
+                        "Authorization": localStorage.getItem('jwtToken')
+                    }
+                })
+            }
+            console.log(dessert)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const deleteDessert = async (section_id, id) => {
+        try {
+            const dessert = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/desserts/${id}`,
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            console.log(dessert)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const updateDrink = async (data, media, id) => {
+        try {
+            const drink = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${data.section_id}/drinks/${id}`,
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            if (media) {
+                await apiCall({
+                    url: `http://127.0.0.1:8000/api/section/${data.section_id}/drinks/${id}/drink-picture`,
+                    method: 'POST',
+                    body: media,
+                    headers: {
+                        "Authorization": localStorage.getItem('jwtToken')
+                    }
+                })
+            }
+            console.log(drink)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const deleteDrink = async (section_id, id) => {
+        try {
+            const drink = await apiCall({
+                url: `http://127.0.0.1:8000/api/section/${section_id}/drinks/${id}`,
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": localStorage.getItem('jwtToken')
+                }
+            })
+            console.log(drink)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <AdminPageContext.Provider value={{
             isLoading,
@@ -214,7 +351,13 @@ const Provider = ({children}) => {
             storeDrink,
             getSectionForm,
             updateSection,
-            deleteSection
+            deleteSection,
+            updateDish,
+            deleteDish,
+            updateDessert,
+            deleteDessert,
+            updateDrink,
+            deleteDrink
         }}>
             {children}
         </AdminPageContext.Provider>
