@@ -55,15 +55,17 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            const picture = await apiCall({
-                url: `http://127.0.0.1:8000/api/section/${section.data.id}/section-picture`,
-                method: 'POST',
-                body: media,
-                headers: {
-                    "Authorization": localStorage.getItem('jwtToken')
-                }
-            })
-            console.log(section, picture)
+            if (media) {
+                await apiCall({
+                    url: `http://127.0.0.1:8000/api/section/${section.data.id}/section-picture`,
+                    method: 'POST',
+                    body: media,
+                    headers: {
+                        "Authorization": localStorage.getItem('jwtToken')
+                    }
+                })
+            }
+            return getSection(section.data.id)
         } catch (e) {
             console.log(e)
         }
@@ -151,16 +153,15 @@ const Provider = ({children}) => {
         }
     }
 
-    const getSectionForm = async (id) => {
+    const getSection = async (id) => {
         try {
-            const section = await apiCall({
+            return await apiCall({
                 url: `http://127.0.0.1:8000/api/section/${id}`,
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            setSectionForm(section)
         } catch (e) {
             console.log(e)
         }
@@ -187,7 +188,7 @@ const Provider = ({children}) => {
                     }
                 })
             }
-            console.log(section)
+            return getSection(section.data.id)
         } catch (e) {
             console.log(e)
         }
@@ -203,7 +204,7 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            console.log(section)
+            return await section
         } catch (e) {
             console.log(e)
         }
@@ -220,7 +221,7 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            if (media) {
+            if (media.values().next().value !== 'undefined') {
                 await apiCall({
                     url: `http://127.0.0.1:8000/api/section/${data.section_id}/dishes/${id}/dish-picture`,
                     method: 'POST',
@@ -230,7 +231,7 @@ const Provider = ({children}) => {
                     }
                 })
             }
-            console.log(dish)
+            return await dish
         } catch (e) {
             console.log(e)
         }
@@ -263,7 +264,7 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            if (media) {
+            if (media.values().next().value !== 'undefined') {
                 await apiCall({
                     url: `http://127.0.0.1:8000/api/section/${data.section_id}/desserts/${id}/dessert-picture`,
                     method: 'POST',
@@ -273,7 +274,7 @@ const Provider = ({children}) => {
                     }
                 })
             }
-            console.log(dessert)
+            return await dessert
         } catch (e) {
             console.log(e)
         }
@@ -306,7 +307,7 @@ const Provider = ({children}) => {
                     "Authorization": localStorage.getItem('jwtToken')
                 }
             })
-            if (media) {
+            if (media.values().next().value !== 'undefined') {
                 await apiCall({
                     url: `http://127.0.0.1:8000/api/section/${data.section_id}/drinks/${id}/drink-picture`,
                     method: 'POST',
@@ -316,7 +317,7 @@ const Provider = ({children}) => {
                     }
                 })
             }
-            console.log(drink)
+            return await drink
         } catch (e) {
             console.log(e)
         }
@@ -350,7 +351,7 @@ const Provider = ({children}) => {
             storeDish,
             storeDessert,
             storeDrink,
-            getSectionForm,
+            getSectionForm: getSection,
             updateSection,
             deleteSection,
             updateDish,

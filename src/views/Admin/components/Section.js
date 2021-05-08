@@ -12,7 +12,7 @@ const Section = ({sections}) => {
         const body = {'name': data.name, 'order': data.order}
         const media = new FormData()
         media.append('media', data.media[0])
-        await storeSection(body, media)
+        await storeSection(body, media.values().next().value !== 'undefined' ? media : false)
         window.location.reload()
     }
 

@@ -15,9 +15,10 @@ const FormDrink = (props) => {
 
         const media = new FormData()
         media.append('media', data.media[0])
+
         if (props.store) await storeDrink(body, media, props.section_id)
         if (props.update) await updateDrink(body, media, props.id)
-        window.location.reload()
+        // window.location.reload()
     }
 
     return (

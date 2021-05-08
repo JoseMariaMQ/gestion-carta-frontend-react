@@ -5,12 +5,13 @@ import FormDrink from "./FormDrink";
 const DrinkEdit = ({id, name, price, hidden, section_id, picture}) => {
     const [editDrink, setEditDrink] = useState([false, null])
     const {updateDrink, deleteDrink} = useContext(AdminPageContext)
+    const [hide, setHide] = useState(hidden)
 
     const setHidden = async (hidden, id, section_id) => {
         const body = {'hidden': hidden, 'section_id': section_id}
         console.log(body)
-        await updateDrink(body, null, id)
-        window.location.reload()
+        const drink = await updateDrink(body, null, id)
+        setHide(drink.data.hidden)
     }
 
     const deleteDrinkId = async (section_id, id) => {
@@ -28,7 +29,7 @@ const DrinkEdit = ({id, name, price, hidden, section_id, picture}) => {
                 <div className="col-8 col-sm-9 p-0 m-0 pl-3 pl-sm-0">
                     <span className="d-flex justify-content-center h6 mb-1">{name}</span>
                     <div className="d-flex justify-content-center">
-                        <button onClick={() => {setHidden(!hidden, id, section_id)}} className={hidden ? "btn btn-success btn-sm ml-1 mr-1" : "btn btn-dark btn-sm ml-1 mr-1"}>{hidden ? 'MOSTRAR' : 'OCULTAR'}</button>
+                        <button onClick={() => {setHidden(!hide, id, section_id)}} className={hide ? "btn btn-success btn-sm ml-1 mr-1" : "btn btn-dark btn-sm ml-1 mr-1"}>{hide ? 'MOSTRAR' : 'OCULTAR'}</button>
                         <button onClick={() => {setEditDrink([!editDrink[0], id])}} className="btn btn-warning btn-sm ml-1 mr-1">{editDrink[0] ? ('CANCELAR') : ('EDITAR')}</button>
                         <button onClick={() => {deleteDrinkId(section_id, id)}} className="btn btn-danger btn-sm ml-1 mr-1">ELIMINAR</button>
                     </div>
